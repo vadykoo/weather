@@ -1,6 +1,9 @@
 Postman collection
 https://www.getpostman.com/collections/09deb27db9c4349f6139
 and in the root folder
+
+[![Watch the video](https://siamscuba.com/wp-content/uploads/2015/09/WatchVideo-1.gif)](https://youtu.be/D-_5DoX7ymM)
+
 ## How to deploy
 composer install
 

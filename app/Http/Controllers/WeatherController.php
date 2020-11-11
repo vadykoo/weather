@@ -29,7 +29,7 @@ class WeatherController extends Controller
             if(!$coord = $this->weatherService->getCityCoordinates($city))
                 throw ValidationException::withMessages(['city' => 'The city not found']); //trowing exeption if city not found in API
         } else {
-            $ip = '91.198.4.227'; //$request->ip();
+            $ip = $request->ip(); //'91.198.4.227';
             $coord = $this->locationService->getCity($ip);
         }
 
