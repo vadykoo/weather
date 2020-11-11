@@ -1,61 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Postman collection
+https://www.getpostman.com/collections/09deb27db9c4349f6139
+and in the root folder
+## How to deploy
+composer install
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+copy yourself a .env file
 
-## About Laravel
+Create a database
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+change database info and update tokens
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+DB_USERNAME = 
+DB_PASSWORD = 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+IPINFO_SECRET=
+OPENWEATHER_SECRET=
 
-## Learning Laravel
+php artisan migrate --seed
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+php artisan serve
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## About Task
 
-## Laravel Sponsors
+Test assignment for the position of PHP developer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Weather data retrieval service
 
-### Premium Partners
+Create a REST API application to get weather data
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+Conditions:
 
-## Contributing
+1. Receiving weather is available only to authorized users.
+Implement authorization capability using JWT. The token must be generated based on the username and password.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Request format:
+POST / api / auth / login
 
-## Code of Conduct
+Options:
+login - string
+password - string
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Response format:
+{
+   "token": "token_string"
+}
 
-## Security Vulnerabilities
+2. Implementation of the weather receiving functionality.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Request format:
+GET / api / weather? City = {$ city} & date = {$ date}
 
-## License
+Options:
+date - optional
+city ​​- optional
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Response format:
+{
+   "temp": 6.82
+   "pressure": 1028,
+   humidity: 93
+}
+
+The temperature should be in degrees Celsius.
+If city is missing in the request, return weather information, determining the current location by the ip from which the request was made.
+If the date parameter is missing in the request, return information about the current weather.
+
+3. Write a seeding with n number of users. User data: name, login, password. The login must be unique.
+
+
+Technical requirements:
+
+1. The application must be written using the Laravel framework
+2. The results of responses must be presented in JSON format
+3. The result of the task should be posted on github
+
+Recommendations for the test task:
+
+To determine the user's location, use the ipinfo.io service.
+Use the openweathermap service to get weather information.

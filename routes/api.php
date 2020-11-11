@@ -26,9 +26,13 @@ Route::group([
     Route::post('register', [\App\Http\Controllers\AuthController::class, 'register']);
     Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [\App\Http\Controllers\AuthController::class, 'refresh']);
-    Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
-
-    // Route::apiResource('boards', \App\Http\Controllers\BoardController::class);
-    // Route::apiResource('labels', \App\Http\Controllers\LabelController::class);
-    // Route::apiResource('boards/{board}/tasks', \App\Http\Controllers\TaskController::class);
 });
+
+Route::group([
+    'middleware' => 'api', 'auth',
+], function ($router) {
+    Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
+    Route::get('weather', [\App\Http\Controllers\WeatherController::class, 'show']);
+});
+
+

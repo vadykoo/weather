@@ -24,7 +24,7 @@ class AuthController extends Controller
      */
     public function login(AuthRequest $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['login', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -34,9 +34,9 @@ class AuthController extends Controller
     }
 
     public function register(RegisterRequest $request) {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['login', 'password']);
 
-        User::create(['name' => $request->name, 'email' => $request->email, 'password' => \Hash::make($request->password)]);
+        User::create(['name' => $request->name, 'login' => $request->login, 'password' => \Hash::make($request->password)]);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -87,9 +87,9 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'token' => $token,
+            // 'token_type' => 'bearer',
+            // 'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
 }
