@@ -14,9 +14,11 @@ Create a database
 change database info and update tokens
 
 DB_USERNAME = 
+
 DB_PASSWORD = 
 
 IPINFO_SECRET=
+
 OPENWEATHER_SECRET=
 
 php artisan migrate --seed
